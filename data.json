@@ -1,0 +1,4 @@
+[
+    {"title": "PAN Card Service", "documents": {"id_proof": "Aadhaar", "photo": "passport.jpg"}},
+    {"title": "Aadhaar Update", "documents": {"id_proof": "PAN", "photo": "user.jpg"}}
+]

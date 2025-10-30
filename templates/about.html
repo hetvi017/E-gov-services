@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content1 %}
+{% block button %}
   <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
 {% endblock %}
 
@@ -74,4 +74,8 @@
     </a>
   </div>
 </div>
+{% endblock %}
+
+{% block footer %}
+  {% include "footer.html" %}
 {% endblock %}

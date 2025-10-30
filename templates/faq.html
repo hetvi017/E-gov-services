@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block button %}
+  <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
+{% endblock %}
+
+{% block content %}
+<section class="w-full max-w-4xl mx-auto bg-white dark:bg-[#052e16] rounded-lg shadow-md p-6">
+  <h1 class="text-3xl font-bold text-center text-primary mb-8">Frequently Asked Questions</h1>
+
+  <div class="space-y-4">
+    <!-- FAQ 1 -->
+    <details class="group border-b border-gray-200 dark:border-gray-700 pb-4">
+      <summary class="flex justify-between items-center cursor-pointer text-lg font-semibold text-gray-800 dark:text-gray-100">
+        What is Krishi E-Government Services?
+        <span class="text-primary group-open:rotate-180 transition-transform duration-200">
+          ▼
+        </span>
+      </summary>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        Krishi E-Government Services is an online platform that provides easy access to various government-related services such as PAN, Aadhaar, and other official documents, all in one place.
+      </p>
+    </details>
+
+    <!-- FAQ 2 -->
+    <details class="group border-b border-gray-200 dark:border-gray-700 pb-4">
+      <summary class="flex justify-between items-center cursor-pointer text-lg font-semibold text-gray-800 dark:text-gray-100">
+        How can I apply for a government service?
+        <span class="text-primary group-open:rotate-180 transition-transform duration-200">
+          ▼
+        </span>
+      </summary>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        You can register or log in to your account, navigate to the “Services” page, choose the required service, fill in the necessary details, upload the required documents, and submit the form.
+      </p>
+    </details>
+
+    <!-- FAQ 3 -->
+    <details class="group border-b border-gray-200 dark:border-gray-700 pb-4">
+      <summary class="flex justify-between items-center cursor-pointer text-lg font-semibold text-gray-800 dark:text-gray-100">
+        How can I track my application status?
+        <span class="text-primary group-open:rotate-180 transition-transform duration-200">
+          ▼
+        </span>
+      </summary>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        Once logged in, go to the “Application Tracking” section. You can view the progress of your submitted application under statuses such as “Pending,” “Processing,” or “Completed.”
+      </p>
+    </details>
+
+    <!-- FAQ 4 -->
+    <details class="group border-b border-gray-200 dark:border-gray-700 pb-4">
+      <summary class="flex justify-between items-center cursor-pointer text-lg font-semibold text-gray-800 dark:text-gray-100">
+        How will I receive my documents?
+        <span class="text-primary group-open:rotate-180 transition-transform duration-200">
+          ▼
+        </span>
+      </summary>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        After your application is marked “Completed,” you can download your document directly from your dashboard. Additionally, a copy will be sent to your registered email address.
+      </p>
+    </details>
+
+    <!-- FAQ 5 -->
+    <details class="group border-b border-gray-200 dark:border-gray-700 pb-4">
+      <summary class="flex justify-between items-center cursor-pointer text-lg font-semibold text-gray-800 dark:text-gray-100">
+        Who can I contact for help or support?
+        <span class="text-primary group-open:rotate-180 transition-transform duration-200">
+          ▼
+        </span>
+      </summary>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        You can reach out to our support team via the “Contact” page. Fill in the form or email us at <a href="mailto:support@krishiservices.in" class="text-primary hover:underline">support@krishiservices.in</a>.
+      </p>
+    </details>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+  {% include "footer.html" %}
+{% endblock %}

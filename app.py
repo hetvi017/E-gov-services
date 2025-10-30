@@ -10,7 +10,7 @@ import smtplib  # For sending emails
 from email.message import EmailMessage
 import random
 import string
-
+import json
 import os
 import uuid
 from datetime import datetime
@@ -50,6 +50,62 @@ def get_db_connection():
         database="gov_services"
     )
 
+# --- STEP 1: Connect to MySQL ---
+try:
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="root",  # change this
+        database="gov_services"   # change this
+    )
+    cursor = conn.cursor()
+    print("✅ Database connected successfully.")
+except mysql.connector.Error as err:
+    print(f"❌ MySQL connection error: {err}")
+    exit()
+
+# --- STEP 2: Load JSON file safely ---
+json_path = r"C:\Users\Hetvi\OneDrive\Desktop\Final Year Project\E-Gov\data.json"  # update your path
+
+if not os.path.exists(json_path):
+    print(f"❌ JSON file not found: {json_path}")
+    exit()
+
+try:
+    with open(json_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+        if not data:
+            print("❌ JSON file is empty or invalid.")
+            exit()
+except json.JSONDecodeError as e:
+    print(f"❌ Invalid JSON format: {e}")
+    exit()
+
+print("✅ JSON loaded successfully.")
+
+try:
+    for record in data:
+        # adjust fields according to your JSON structure
+        title = record.get("title")
+        documents = json.dumps(record.get("documents", {}))  # safely handle missing keys
+
+        cursor.execute("""
+            INSERT INTO service (title, documents)
+            VALUES (%s, %s)
+        """, (title, documents))
+    
+    conn.commit()
+    print("✅ JSON data inserted successfully into MySQL.")
+
+except TypeError as te:
+    print(f"❌ TypeError occurred: {te}")
+except mysql.connector.Error as err:
+    print(f"❌ MySQL error: {err}")
+finally:
+    cursor.close()
+    conn.close()
+    print("🔒 Database connection closed.")
+
 
 # ---------- MODELS ----------
 # ✅ Define your model
@@ -60,7 +116,7 @@ class Service(db.Model):
     short_desc = db.Column(db.Text)
     long_desc = db.Column(db.Text)
     base_price = db.Column(db.Float)
-    documents = db.Column(db.Text)  # list of {"name": "Aadhaar", "price": 20.0}
+    documents = db.Column(db.Text)  # ✅ store as TEXT  # list of {"name": "Aadhaar", "price": 20.0}
 
 class Application(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -89,33 +145,41 @@ def generate_app_id():
     return f"APP-{next_num:04d}"
 
 def calculate_item_amount(service_obj, selected_doc_names):
+    import json
     total = Decimal(service_obj.base_price or 0)
-    docs = service_obj.documents or []
-    if isinstance(docs, str):
-        try:
-            import json
-            docs = json.loads(docs)
-        except Exception:
-            docs = []
+    docs = service_obj.documents
+
+    # ✅ Convert JSON text to Python list
+    try:
+        docs = json.loads(docs) if docs else []
+    except Exception:
+        docs = []
+
     for doc in docs:
         if isinstance(doc, dict) and doc.get('name') in selected_doc_names:
             total += Decimal(str(doc.get('price', 0)))
     return total
 
 
+
 # ---------- SAMPLE DATA LOADER (run once) ----------
 @app.cli.command("initdb")
 def initdb_command():
-    
-    # Add sample services if none exist
+    db.create_all()
+
     if not Service.query.first():
+        import json
         s1 = Service(
             title="PAN Card Service",
             image="pan.jpg",
             short_desc="Apply or update PAN",
             long_desc="Full PAN support",
             base_price=50,
-            documents=[{"name":"Passport Photo","price":20},{"name":"Aadhaar Copy","price":10},{"name":"Address Proof","price":15}]
+            documents=json.dumps([
+                {"name": "Passport Photo", "price": 20},
+                {"name": "Aadhaar Copy", "price": 10},
+                {"name": "Address Proof", "price": 15}
+            ])
         )
         s2 = Service(
             title="Aadhaar Service",
@@ -123,12 +187,15 @@ def initdb_command():
             short_desc="Aadhaar update & registration",
             long_desc="Aadhaar support",
             base_price=40,
-            documents=[{"name":"Passport Photo","price":20},{"name":"Proof of Address","price":10}]
+            documents=json.dumps([
+                {"name": "Passport Photo", "price": 20},
+                {"name": "Proof of Address", "price": 10}
+            ])
         )
-        db.session.add_all([s1,s2])
+        db.session.add_all([s1, s2])
         db.session.commit()
-    print("DB initialized")
-    db.create_all()
+    print("✅ Database initialized successfully with sample data")
+
 
 
 @app.route('/')
@@ -286,6 +353,10 @@ def terms():
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
 
 
 services_data = [

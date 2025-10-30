@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-primary mb-4 text-center">Apply for {{ service.title }}</h2>
+  <p class="text-muted text-center mb-4">{{ service.description }}</p>
+
+  <form action="{{ url_for('submit_application', id=service.id) }}" method="post" class="mx-auto" style="max-width:500px;">
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-control" name="fullname" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+  </form>
+</div>
+{% endblock %}
