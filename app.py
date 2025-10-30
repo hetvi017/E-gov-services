@@ -17,6 +17,9 @@ from datetime import datetime
 from decimal import Decimal
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import JSON
+import warnings
+warnings.filterwarnings("ignore", message="pkg_resources is deprecated")
+
 import razorpay
 from dotenv import load_dotenv
 
@@ -52,12 +55,12 @@ def get_db_connection():
 # ✅ Define your model
 class Service(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    image = db.Column(db.String(200), nullable=False)
-    short_desc = db.Column(db.String(255), nullable=False)
-    long_desc = db.Column(db.Text, nullable=False)
-    base_price = db.Column(db.Float, nullable=False)
-    documents = db.Column(db.String(500), nullable=False)  # list of {"name": "Aadhaar", "price": 20.0}
+    title = db.Column(db.String(255))
+    image = db.Column(db.String(255))
+    short_desc = db.Column(db.Text)
+    long_desc = db.Column(db.Text)
+    base_price = db.Column(db.Float)
+    documents = db.Column(db.Text)  # list of {"name": "Aadhaar", "price": 20.0}
 
 class Application(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -86,9 +89,16 @@ def generate_app_id():
     return f"APP-{next_num:04d}"
 
 def calculate_item_amount(service_obj, selected_doc_names):
-    total = Decimal(service_obj.base_price)
-    for doc in service_obj.documents or []:
-        if doc['name'] in selected_doc_names:
+    total = Decimal(service_obj.base_price or 0)
+    docs = service_obj.documents or []
+    if isinstance(docs, str):
+        try:
+            import json
+            docs = json.loads(docs)
+        except Exception:
+            docs = []
+    for doc in docs:
+        if isinstance(doc, dict) and doc.get('name') in selected_doc_names:
             total += Decimal(str(doc.get('price', 0)))
     return total
 
@@ -96,7 +106,7 @@ def calculate_item_amount(service_obj, selected_doc_names):
 # ---------- SAMPLE DATA LOADER (run once) ----------
 @app.cli.command("initdb")
 def initdb_command():
-    db.create_all()
+    
     # Add sample services if none exist
     if not Service.query.first():
         s1 = Service(
@@ -118,6 +128,7 @@ def initdb_command():
         db.session.add_all([s1,s2])
         db.session.commit()
     print("DB initialized")
+    db.create_all()
 
 
 @app.route('/')
@@ -327,8 +338,12 @@ with app.app_context():
 
 @app.route('/services')
 def services():
-    all_services = Service.query.all()
-    return render_template('services.html', services=all_services)
+    try:
+        services = Service.query.all()
+        return render_template('services.html', services=services)
+    except Exception as e:
+        print("Error:", e)
+        return render_template('services.html', services=[])
 
 @app.route('/service/<int:service_id>')
 def service_detail(service_id):

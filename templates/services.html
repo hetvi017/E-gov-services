@@ -25,11 +25,12 @@
   <!-- Services Container -->
   <div id="servicesContainer"
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300">
+    {% if services %}
     {% for services in services %}
     <a href="{{ url_for('service_detail', service_id=services.id) }}"
       class="block border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg bg-background-light dark:bg-gray-800 transition transform hover:-translate-y-1">
-      <img src="{{ url_for('static', filename='images/' + services.image) }}" alt="{{ services.title }}"
-        class="w-full h-40 object-cover">
+      <img src="{{ url_for('static', filename='images/' + (services.image or 'default.jpg')) }}" alt="{{ services.title }}"
+        class="w-full h-40 object-cover"/>
       <div class="p-5">
         <h3
           class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition truncate">
@@ -38,6 +39,9 @@
       </div>
     </a>
     {% endfor %}
+    {% else %}
+      <p>No services found.</p>
+    {% endif %}
   </div>
 </div>
 
