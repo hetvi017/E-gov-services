@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content1 %}
+  <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
+{% endblock %}
+
+{% block content %}<main class="terms-content container my-5">
+  <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+    <h1 class="text-center mb-4 fw-bold text-primary">Terms of Service</h1>
+    <p class="text-center text-muted">Last Updated: October 2025</p>
+
+    <section>
+      <h2 class="mt-5 text-primary">1. Introduction</h2>
+      <p>
+        Welcome to <strong>Government Services Registration</strong>. By accessing or using our website and services,
+        you agree to comply with and be bound by these Terms of Service. Please read them carefully before using our platform.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">2. Eligibility</h2>
+      <p>
+        You must be at least 18 years old to use our services. By registering, you confirm that all the information provided is accurate and truthful.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">3. Services Provided</h2>
+      <p>
+        Our portal offers access to various e-governance and document-related services such as PAN Card, Aadhaar Card,
+        and other official applications. We act as a facilitator between users and respective government departments.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">4. User Obligations</h2>
+      <p>
+        Users are responsible for providing correct information and documents. Misuse of our services or submission of fraudulent documents
+        may lead to account suspension and legal action under applicable laws.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">5. Payments and Refunds</h2>
+      <p>
+        All payments made through our platform are processed securely via authorized gateways. Once an application is submitted and payment confirmed,
+        no refund shall be entertained except in cases of technical failure or service denial.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">6. Privacy Policy</h2>
+      <p>
+        Your personal data is collected and processed as per our
+        <a href="{{ url_for('privacy') }}" class="text-decoration-none text-primary">Privacy Policy</a>.
+        We ensure strict confidentiality and data protection in compliance with applicable data protection laws.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">7. Limitation of Liability</h2>
+      <p>
+        We are not responsible for delays or rejections caused by government departments.
+        Our liability is limited to the amount paid by the user for the specific service.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">8. Changes to Terms</h2>
+      <p>
+        We reserve the right to modify these Terms at any time. Updated terms will be posted on this page,
+        and continued use of the platform constitutes acceptance of any modifications.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="mt-5 text-primary">9. Contact Us</h2>
+      <p>If you have any questions or concerns about these Terms, please contact us at:</p>
+      <ul>
+        <li><strong>Email:</strong> support@govservices.in</li>
+        <li><strong>Phone:</strong> +91-9876543210</li>
+      </ul>
+    </section>
+  </div>
+</main>
+{% endblock %}

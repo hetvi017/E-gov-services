@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content1 %}
+  <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-lg space-y-8 bg-white dark:bg-[#063b20] p-10 rounded-xl shadow-lg">
+
+  <!-- Header -->
+    <div class="text-center">
+    <h2 class="text-2xl font-bold text-primary dark:text-primary">Contact Us</h2>
+    <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+      Have a question? Send us a message!
+    </p>
+  </div>
+
+  <!-- Contact Info -->
+  <div class="space-y-4 text-center">
+    <p><strong>Address:</strong> 123 Krishi Nagar, Ahmedabad, Gujarat, India</p>
+    <p><strong>Phone:</strong> +91 98765 43210</p>
+    <p><strong>Email:</strong> support@krishiservices.in</p>
+  </div>
+
+  <!-- Button to show form -->
+  <div class="text-center">
+    <button id="showFormBtn" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200">
+      Send Message
+    </button>
+  </div>
+
+  <!-- Hidden Contact Form -->
+  <div id="contactForm" class="hidden mt-6 space-y-6">
+    <form action="{{ url_for('send_message') }}" method="POST" class="space-y-4">
+      <div>
+        <input type="text" name="name" placeholder="Your Name" required
+          class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+      </div>
+      <div>
+        <input type="email" name="email" placeholder="Your Email" required
+          class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+      </div>
+      <div>
+        <input type="text" name="subject" placeholder="Subject" required
+          class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+      </div>
+      <div>
+        <textarea name="message" rows="4" placeholder="Your Message" required
+          class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200">
+          Submit Message
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+  const showFormBtn = document.getElementById('showFormBtn');
+  const contactForm = document.getElementById('contactForm');
+
+  showFormBtn.addEventListener('click', () => {
+    contactForm.classList.toggle('hidden');
+    contactForm.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+{% endblock %}

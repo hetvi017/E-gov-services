@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white dark:bg-[#063b20] p-8 rounded-xl shadow-lg text-center">
+  <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Application Tracking</h2>
+  <p class="text-lg text-gray-800 dark:text-gray-300 mb-6">Tracking for <span class="font-semibold">{{ service.title }}</span></p>
+
+  <div class="flex justify-center">
+    <div class="flex flex-col space-y-4 text-left">
+      <div class="flex items-center space-x-3">
+        <span class="w-5 h-5 bg-primary rounded-full"></span>
+        <span class="text-gray-900 dark:text-gray-100 font-medium">Submitted</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <span class="w-5 h-5 bg-yellow-400 rounded-full"></span>
+        <span class="text-gray-900 dark:text-gray-100 font-medium">Processing</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <span class="w-5 h-5 bg-gray-400 rounded-full"></span>
+        <span class="text-gray-900 dark:text-gray-100 font-medium">Completed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <a href="/services" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition">
+      ← Back to Services
+    </a>
+  </div>
+</div>
+{% endblock %}

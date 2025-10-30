@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-md mx-auto p-6 bg-white rounded-lg text-center">
+  <h2 class="text-2xl font-bold">Payment</h2>
+  <p class="mt-4">Order ID: {{ service_order.app_id }}</p>
+  <p class="mt-1">Amount: ₹{{ service_order.total_amount }}</p>
+
+  <button id="rzp-button" class="mt-6 bg-blue-600 text-white px-6 py-3 rounded">Pay with Razorpay</button>
+
+  <form id="payment-success" action="{{ url_for('payment_success') }}" method="POST" style="display:none;">
+    <input name="razorpay_payment_id" id="razorpay_payment_id"/>
+    <input name="razorpay_order_id" id="razorpay_order_id"/>
+  </form>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+const options = {
+    "key": "{{ razorpay_key }}",
+    "amount": "{{ (service_order.total_amount * 100)|int }}",
+    "currency": "INR",
+    "name": "Krishi E-Government Services",
+    "description": "{{ service_order.app_id }}",
+    "order_id": "{{ razorpay_order['id'] }}",
+    "handler": function (response){
+        // send server to confirm
+        document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+        document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
+        document.getElementById('payment-success').submit();
+    },
+    "prefill": {
+        "name": "{{ service_order.applicant_name }}",
+        "email": "{{ service_order.email }}",
+        "contact": "{{ service_order.phone }}"
+    },
+    "theme": {
+        "color": "#16a34a"
+    }
+};
+const rzp = new Razorpay(options);
+document.getElementById('rzp-button').onclick = function(e){
+    rzp.open();
+    e.preventDefault();
+}
+</script>
+{% endblock %}

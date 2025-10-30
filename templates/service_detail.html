@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-4xl mx-auto p-6 bg-white dark:bg-[#063b20] rounded-lg">
+  <div class="grid md:grid-cols-2 gap-6">
+    <img src="{{ url_for('static', filename='images/' + service.image) }}" class="w-full h-72 object-cover rounded" />
+    <div>
+      <h2 class="text-2xl font-bold">{{ service.title }}</h2>
+      <p class="text-sm text-gray-600 my-3">{{ service.long_desc }}</p>
+
+      <div>
+        <p class="font-semibold">Base Price: ₹{{ service.base_price }}</p>
+      </div>
+
+      <div class="mt-4">
+        <h4 class="font-semibold">Select Documents (price shown):</h4>
+        <div id="docs" class="mt-2 space-y-2">
+          {% for doc in service.documents %}
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" data-name="{{doc.name}}" data-price="{{doc.price}}">
+            <span>{{ doc.name }} (₹{{ doc.price }})</span>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <p class="text-lg">Total: ₹<span id="total">{{ service.base_price }}</span></p>
+        <button id="addToCart" class="mt-3 bg-primary text-white px-4 py-2 rounded">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const basePrice = parseFloat("{{ service.base_price }}");
+function computeTotal(){
+  let total = basePrice;
+  document.querySelectorAll('#docs input[type=checkbox]').forEach(cb=>{
+    if(cb.checked) total += parseFloat(cb.dataset.price || 0);
+  });
+  return total;
+}
+document.querySelectorAll('#docs input[type=checkbox]').forEach(cb=>{
+  cb.addEventListener('change', ()=> {
+    document.getElementById('total').innerText = computeTotal().toFixed(2);
+  });
+});
+document.getElementById('addToCart').addEventListener('click', async ()=>{
+  const selected = [];
+  document.querySelectorAll('#docs input[type=checkbox]').forEach(cb=>{ if(cb.checked) selected.push(cb.dataset.name); });
+  const payload = { service_id: {{ service.id }}, selected_documents: selected };
+  const res = await fetch('{{ url_for("cart_add") }}', {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if(data.ok){
+    window.location.href = "{{ url_for('view_cart') }}"; // or stay and show toast
+  } else {
+    alert('Failed to add to cart');
+  }
+});
+</script>
+{% endblock %}

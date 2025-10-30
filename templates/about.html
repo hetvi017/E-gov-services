@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content1 %}
+  <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-4xl space-y-12 bg-white dark:bg-[#063b20] p-10 rounded-xl shadow-lg">
+  <!-- Hero Section / Banner -->
+  <div class="relative rounded-xl overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1500&q=80" alt="Krishi Banner" class="w-full h-64 sm:h-80 object-cover"/>
+    <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white">About Krishi E-Government Services</h1>
+      <p class="mt-2 text-white text-sm sm:text-base">Empowering citizens with seamless access to government services</p>
+    </div>
+  </div>
+
+  <!-- Vision Section -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-primary dark:text-primary">Our Vision</h2>
+    <p class="mt-3 text-gray-700 dark:text-gray-300">
+      Our vision is to create a unified, citizen-friendly digital platform that simplifies access to government services, ensuring transparency, efficiency, and trust for every individual and to simplify the process of availing government services by providing a user-friendly, secure, and reliable online ecosystem that citizens can trust.
+    </p>
+  </div>
+
+  <!-- Mission Section -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-primary dark:text-primary">Our Mission</h2>
+    <p class="mt-3 text-gray-700 dark:text-gray-300">
+      Our mission is to develop a user-friendly online platform that simplifies the process of applying for government documents, ensures transparent communication, enables secure payments, and provides end-to-end support from application to completion.
+    </p>
+  </div>
+
+  <!-- Services Section -->
+  <div>
+    <h2 class="text-2xl font-bold text-primary dark:text-primary text-center mb-6">Our Services</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 bg-background-light dark:bg-[#042b17] rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
+        <h3 class="font-semibold text-primary dark:text-primary mb-2">PAN Card Services</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-sm">Apply for new PAN cards or corrections easily and securely.</p>
+      </div>
+      <div class="p-6 bg-background-light dark:bg-[#042b17] rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
+        <h3 class="font-semibold text-primary dark:text-primary mb-2">Aadhaar Updates</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-sm">Update your Aadhaar information quickly through guided steps.</p>
+      </div>
+      <div class="p-6 bg-background-light dark:bg-[#042b17] rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
+        <h3 class="font-semibold text-primary dark:text-primary mb-2">Certificates</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-sm">Apply for income, marriage, domicile, and other legal certificates.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-primary dark:text-primary">About Us</h2>
+    <p class="mt-3 text-gray-700 dark:text-gray-300">
+      <div class="text-justify">
+      Krishi E-Government Services is an initiative aimed at making government documentation easier, faster, and more accessible for everyone. Whether it’s applying for a PAN card, updating Aadhaar details, or requesting official certificates, users can complete all processes online in a few simple steps.
+      Our platform offers real-time tracking, secure payments, and automatic email notifications to keep users updated at every stage. We believe in combining technology and transparency to create a smooth, reliable experience for every citizen.
+      </div>
+    </p>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="text-center mt-6">
+    <h2 class="text-2xl font-bold text-primary dark:text-primary">Contact Us</h2>
+    <p class="mt-2 text-gray-700 dark:text-gray-300 mb-4">
+      <b> 
+        Need help or have questions? Reach out to our support team. 
+      </b>
+    </p>
+    <a href="mailto:hetvi5007@gmail.com" class="px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-colors duration-200">
+      📧 Contact Support
+    </a>
+  </div>
+</div>
+{% endblock %}

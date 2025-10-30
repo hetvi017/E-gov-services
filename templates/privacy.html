@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content1 %}
+  <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <article class="card shadow-sm p-4">
+        <header class="mb-4">
+          <h1 class="h3">Privacy Policy</h1>
+          <p class="text-muted">Effective date: {{ effective_date or "January 1, 2025" }}</p>
+        </header>
+
+        <section class="mb-3">
+          <h2 class="h5">1. Introduction</h2>
+          <p>
+            Welcome to {{ company_name or 'Our Company' }}. We respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+          </p>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">2. Information We Collect</h2>
+          <ul>
+            <li><strong>Personal Information:</strong> Name, email address, phone number, postal address, and other identifiers you provide when registering or submitting forms.</li>
+            <li><strong>Usage Data:</strong> Pages visited, time spent, IP address, browser type, and device information collected automatically via cookies and analytics tools.</li>
+            <li><strong>Payment Data:</strong> Payment method details (processed by our payment provider). We do not store full payment card details on our servers.</li>
+          </ul>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">3. How We Use Your Information</h2>
+          <p>We use the information we collect to:</p>
+          <ul>
+            <li>Provide, operate, and maintain our services.</li>
+            <li>Process transactions and send confirmations.</li>
+            <li>Communicate with you about updates, promotions, and support.</li>
+            <li>Improve our website, products, and services through analytics.</li>
+            <li>Comply with legal obligations and resolve disputes.</li>
+          </ul>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">4. Cookies and Tracking Technologies</h2>
+          <p>
+            We use cookies and similar tracking technologies to track activity on our website and hold certain information. You can control cookie preferences through your browser settings or via any cookie consent tool we provide on the site.
+          </p>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">5. Sharing and Disclosure</h2>
+          <p>
+            We may share your information with:
+          </p>
+          <ul>
+            <li>Service providers who perform services on our behalf (e.g., hosting, payment processing, analytics).</li>
+            <li>Law enforcement or regulators if required by law or to protect our rights.</li>
+            <li>Third parties in connection with a corporate transaction (merger, acquisition, asset sale).</li>
+          </ul>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">6. Data Security</h2>
+          <p>
+            We implement reasonable administrative, technical, and physical safeguards designed to protect your personal information. However, no method of transmission or storage is 100% secure — please exercise caution when sharing sensitive information online.
+          </p>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">7. Your Rights</h2>
+          <p>
+            Depending on your jurisdiction, you may have rights to access, correct, update, or delete your personal information, and to object to or restrict certain processing. To exercise these rights, contact us at {{ contact_email or 'privacy@example.com' }}.
+          </p>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">8. Third-Party Links</h2>
+          <p>
+            Our site may contain links to third-party websites. We are not responsible for the privacy practices of those websites. Please review their privacy policies before providing personal information.
+          </p>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">9. Children's Privacy</h2>
+          <p>
+            Our services are not directed to children under 13 (or a higher age if required by local law). We do not knowingly collect personal information from children. If we become aware that we have collected such information, we will take steps to delete it.
+          </p>
+        </section>
+
+        <section class="mb-3">
+          <h2 class="h5">10. Changes to This Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. When changes are made, we will update the effective date at the top of the page. Continued use of the service after changes constitutes acceptance of the updated policy.
+          </p>
+        </section>
+
+        <footer class="mt-4 pt-3 border-top">
+          <p class="mb-1">For questions or concerns, contact us at <a href="mailto:{{ contact_email or 'privacy@example.com' }}">{{ contact_email or 'privacy@example.com' }}</a>.</p>
+          <p class="text-muted small mb-0">© {{ current_year or "2025" }} {{ company_name or 'Your Company' }}. All rights reserved.</p>
+        </footer>
+
+      </article>
+    </div>
+  </div>
+</div>
+{% endblock %}

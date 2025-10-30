@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Krishi E-Government Services</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#16a34a", // Changed to a shade of green
+                "background-light": "#f0fdf4", // Lighter green for background
+                "background-dark": "#052e16", // Dark green for dark mode background
+              },
+              fontFamily: {
+                "display": ["Public Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+          font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex flex-col min-h-screen">
+<header class="w-full bg-white dark:bg-[#042110] shadow-sm sticky top-0 z-50">
+{% include "header.html" %}
+</header>
+<main class="flex-grow">
+<section class="relative bg-white dark:bg-[#042110] py-20 sm:py-32">
+<div class="absolute inset-0 bg-primary/10 dark:bg-primary/20 opacity-50"></div>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="text-center">
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                            Welcome to <span class="text-primary">Krishi E-Government Services</span>
+</h1>
+<p class="mt-4 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                            Your one-stop portal for accessing various government services efficiently and transparently.
+                        </p>
+<div class="mt-8 flex justify-center gap-x-4">
+<a class="inline-block px-8 py-3 bg-primary text-white rounded-full font-semibold shadow-md hover:bg-primary/90 transition-transform transform hover:-translate-y-1" href="/login">
+                                Explore Services
+                            </a>
+<a class="inline-block px-8 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-full font-semibold shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform transform hover:-translate-y-1" href="#">
+                                Learn More
+                            </a>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 sm:py-24">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white">Our Services</h2>
+<p class="mt-2 text-lg text-gray-600 dark:text-gray-400">Find the service you need.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-white dark:bg-[#063b20] rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+<div class="p-8">
+<div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 dark:bg-primary/20 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">badge</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">PAN Card Services</h3>
+<p class="text-gray-600 dark:text-gray-400 mb-6">Apply for a new PAN card, make corrections, or track your application status.</p>
+<a class="font-semibold text-primary hover:underline" href="#">Apply Now <span aria-hidden="true">→</span></a>
+</div>
+</div>
+<div class="bg-white dark:bg-[#063b20] rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+<div class="p-8">
+<div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 dark:bg-primary/20 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">fingerprint</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Aadhaar Services</h3>
+<p class="text-gray-600 dark:text-gray-400 mb-6">Update your Aadhaar details, download e-Aadhaar, or check your Aadhaar status.</p>
+<a class="font-semibold text-primary hover:underline" href="#">Get Started <span aria-hidden="true">→</span></a>
+</div>
+</div>
+<div class="bg-white dark:bg-[#063b20] rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+<div class="p-8">
+<div class="flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 dark:bg-primary/20 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">agriculture</span>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Voter ID Card</h3>
+<p class="text-gray-600 dark:text-gray-400 mb-6">Register for a Voter ID card to avail various benefits.</p>
+<a class="font-semibold text-primary hover:underline" href="#">Register Now <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white dark:bg-[#042110] mt-auto">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="text-center text-gray-600 dark:text-gray-400">
+<p>© 2023 Krishi E-Government Services. All Rights Reserved.</p>
+<p class="mt-2 text-sm">Designed to serve the citizens of our nation.</p>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-4xl mx-auto p-6 bg-white rounded-lg">
+  <h2 class="text-2xl font-bold">Cart</h2>
+  {% if not cart %}
+    <p>Your cart is empty.</p>
+  {% else %}
+    <div class="space-y-4 mt-4">
+      {% for item in cart %}
+      <div class="flex items-center justify-between border rounded p-3">
+        <div class="flex items-center space-x-4">
+          <img src="{{ url_for('static', filename='images/' + item.image) }}" class="w-20 h-20 object-cover rounded">
+          <div>
+            <div class="font-semibold">{{ item.title }}</div>
+            <div class="text-sm text-gray-600">Docs: {{ item.selected_documents | join(', ') }}</div>
+          </div>
+        </div>
+        <div class="text-lg font-semibold">₹{{ item.item_amount }}</div>
+      </div>
+      {% endfor %}
+      <div class="text-right">
+        <a href="{{ url_for('apply') }}" class="bg-primary text-white px-6 py-2 rounded">Proceed to Application Form</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

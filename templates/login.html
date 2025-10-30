@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content1 %}
+  <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/register">Register</a>
+{% endblock %}
+{% block content %}
+<div class="w-full max-w-md space-y-8 bg-white dark:bg-[#063b20] p-10 rounded-xl shadow-lg">
+<div>
+<h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+          Login to Your Account
+        </h2>
+<p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+          Access government services securely
+        </p>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="text-red-600" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<form action="/login" class="mt-8 space-y-6" method="POST">
+<div class="rounded-md shadow-sm -space-y-px">
+<div>
+<label class="sr-only" for="email">Email or Phone</label>
+<input class="appearance-none rounded-t-lg relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" id="email" name="email" placeholder="Email or Phone" required="" type="text"/>
+</div>
+<div>
+<label class="sr-only" for="password">Password</label>
+<input autocomplete="current-password" class="appearance-none rounded-b-lg relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" id="password" name="password" placeholder="Password" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+</div>
+<div class="text-sm">
+<a class="font-medium text-primary hover:text-primary/80" href="{{ url_for('forgot_password') }}">
+              Forgot Password?
+            </a>
+</div>
+</div>
+<div>
+<button class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200" type="submit">
+            Login
+          </button>
+</div>
+</form>
+<div class="text-sm text-center">
+<p class="text-gray-600 dark:text-gray-400">Don't have an account? <a class="font-medium text-primary hover:text-primary/80" href="register">Register</a></p>
+</div>
+</div>
+{% endblock %}
