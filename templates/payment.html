@@ -1,46 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="max-w-md mx-auto p-6 bg-white rounded-lg text-center">
-  <h2 class="text-2xl font-bold">Payment</h2>
-  <p class="mt-4">Order ID: {{ service_order.app_id }}</p>
-  <p class="mt-1">Amount: ₹{{ service_order.total_amount }}</p>
 
-  <button id="rzp-button" class="mt-6 bg-blue-600 text-white px-6 py-3 rounded">Pay with Razorpay</button>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#021b10] py-10 px-4">
+  <div class="w-full max-w-lg bg-white dark:bg-[#063b20] rounded-2xl shadow-lg p-8 space-y-6 text-center">
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">💳 Payment</h2>
+    <p class="text-gray-500 dark:text-gray-300">Complete your payment securely before submitting your application</p>
 
-  <form id="payment-success" action="{{ url_for('payment_success') }}" method="POST" style="display:none;">
-    <input name="razorpay_payment_id" id="razorpay_payment_id"/>
-    <input name="razorpay_order_id" id="razorpay_order_id"/>
-  </form>
+    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 text-left">
+      <div class="flex justify-between mb-1">
+        <span>Service Name</span>
+        <span>{{ service.title }}</span>
+      </div>
+      <div class="flex justify-between mb-1">
+        <span>Application Fee</span>
+        <span>₹{{ service.base_price }}</span>
+      </div>
+      <hr class="my-2">
+      <div class="flex justify-between font-bold text-lg">
+        <span>Total</span>
+        <span>₹{{ service.base_price }}</span>
+      </div>
+    </div>
+
+    <!-- Razorpay Payment Button -->
+    <button id="rzp-button1" 
+            class="bg-green-600 text-white py-3 px-8 rounded-full w-full hover:bg-green-700 transition-all duration-200">
+      Pay with Razorpay
+    </button>
+
+    <!-- Submit After Payment -->
+    <form method="POST" class="mt-4">
+      <button type="submit"
+              class="bg-blue-600 text-white py-3 px-8 rounded-full w-full hover:bg-blue-700 transition-all duration-200">
+        Submit Application
+      </button>
+    </form>
+  </div>
 </div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-const options = {
-    "key": "{{ razorpay_key }}",
-    "amount": "{{ (service_order.total_amount * 100)|int }}",
-    "currency": "INR",
-    "name": "Krishi E-Government Services",
-    "description": "{{ service_order.app_id }}",
-    "order_id": "{{ razorpay_order['id'] }}",
-    "handler": function (response){
-        // send server to confirm
-        document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
-        document.getElementById('razorpay_order_id').value = response.razorpay_order_id;
-        document.getElementById('payment-success').submit();
-    },
-    "prefill": {
-        "name": "{{ service_order.applicant_name }}",
-        "email": "{{ service_order.email }}",
-        "contact": "{{ service_order.phone }}"
-    },
-    "theme": {
-        "color": "#16a34a"
-    }
-};
-const rzp = new Razorpay(options);
-document.getElementById('rzp-button').onclick = function(e){
-    rzp.open();
-    e.preventDefault();
+document.getElementById('rzp-button1').onclick = async function(e) {
+  e.preventDefault();
+  const response = await fetch("/create_order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount: {{ service.base_price|int * 100 }} })
+  });
+
+  const orderData = await response.json();
+
+  var options = {
+      "key": "rzp_test_RYA0tri2cAfoE8",
+      "amount": orderData.amount,
+      "currency": "INR",
+      "name": "Krishi E-Government Services",
+      "description": "Payment for {{ service.title }}",
+      "order_id": orderData.id,
+      "handler": function (response){
+          alert('✅ Payment successful! You can now submit your application.');
+      },
+      "theme": { "color": "#0f9d58" }
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.open();
 }
 </script>
+
 {% endblock %}

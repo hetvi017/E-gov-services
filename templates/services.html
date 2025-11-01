@@ -3,7 +3,6 @@
 {% block button %}
   <a class="px-6 py-2 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary rounded-full font-semibold hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors duration-200" href="/">Logout</a>
 {% endblock %}
-
 {% block content %}
 <div class="w-full max-w-7xl mx-auto p-6 bg-white dark:bg-[#063b20] rounded-xl shadow-lg">
 
@@ -32,7 +31,7 @@
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300">
     {% if services %}
     {% for services in services %}
-    <a href="{{ url_for('service_detail', service_id=services.id) }}"
+    <a href="{{ url_for('service_detail', id=services.id) }}"
       class="block border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg bg-background-light dark:bg-gray-800 transition transform hover:-translate-y-1">
       <img src="{{ url_for('static', filename='images/' + (services.image or 'default.jpg')) }}" alt="{{ services.title }}"
         class="w-full h-40 object-cover"/>
